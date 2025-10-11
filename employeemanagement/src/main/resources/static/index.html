@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color:paleturquoise;
+        }
+
+        .container{
+            margin-top:20px ;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .btn,.updatebtn{
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .btn:hover{
+          border-color: 2px solid black;
+
+        }
+        .inpupdate{
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            border-bottom: 2px solid black;
+        }
+
+        #result{
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .box{
+            margin-top: 10px;
+            border-radius: 5px;
+            gap: 10px;
+            padding: 10px;
+            width: 200px;
+            background-color:orange;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="container">
+    <button id="getallemp" class="btn">Get All Emp</button><br>
+    <button id="GetEmpByIdBtn" class="btn">Get Employee By Id</button><br>
+    <button class="updatebtn">Update Emp By Id</button><br>
+    <button id="delbtn" class="btn">Delete Emp By Id</button><br>
+   </div>
+
+   <!-- -->
+
+   <div class="editcontainer"  style="display:none;">
+    <!-- <label for="">Id </label>
+    <input type="number" id="inpid"><br>
+   <label for="">Name</label>
+   <input type = "text" id="nameInp"><br>
+   <label for="">Salary</label>
+   <input type="number" id="numInp"><br>
+   <button id="subtn">Submit</button> -->
+   <p style="margin-top: 10px;">Enter The Emp Details</p>
+   <table>
+    <tr>
+        <td><label for="">Id</label></td>
+        <td><input class="inpupdate" type="number" id="inpid"></td>
+    </tr>
+    <tr>
+        <td><label for="">Name</label></td>
+        <td><input class="inpupdate" type="text" id="nameInp"></td>
+    </tr>
+    <tr>
+        <td><label for="">Salary</label></td>
+        <td><input class="inpupdate" type="text" id="numInp"></td>
+    </tr>
+    <tr>
+        <td><button id="subtn" style="padding: 5px; border: none; border-radius: 5px; cursor: pointer;">Submit</button></td>
+    </tr>
+   </table>
+   </div>
+
+   <h2 id="resdata" style="margin-top: 10px;">Result</h2>
+      <label  id="label" style="display: none; margin-top: 10px;">Enter The Id</label>
+      <input id="inp" type="number" style="display: none; border: none;">
+      <div id="result"></div>
+    <script src="app.js"></script>
+</body>
+</html>
