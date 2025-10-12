@@ -18,6 +18,8 @@
             margin-top:20px ;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            /* justify-content: space-evenly; */
 
         }
 
@@ -39,20 +41,54 @@
         }
 
         #result{
-            padding: 2rem;
+            /* padding: 2rem;    */
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
             gap: 10px;
         }
         .box{
             margin-top: 10px;
             border-radius: 5px;
             gap: 10px;
-            padding: 10px;
+            /* padding: 10px; */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* soft shadow */
+            transition: transform 0.2s ease; /* hover animation */
             width: 200px;
             background-color:orange;
             border: 2px solid black;
         }
+        .box:hover {
+  transform: scale(1.05); /* subtle hover zoom */
+}
+
+
+/* Tablets — show 2 per row */
+@media (max-width: 768px) {
+  .box {
+    width: 45%;
+  }
+}
+
+/* Phones — show 1 per row */
+@media (max-width: 480px) {
+  .box {
+    width: 90%;
+  }
+  .container{
+            margin-top:20px ;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            /* justify-content: space-evenly; */
+
+        }
+}
+
+
+
     </style>
 </head>
 <body>
@@ -78,7 +114,7 @@
    <table>
     <tr>
         <td><label for="">Id</label></td>
-        <td><input class="inpupdate" type="number" id="inpid"></td>
+        <td><input class="inpupdate" type="number" id="inpid" readonly></td>
     </tr>
     <tr>
         <td><label for="">Name</label></td>
@@ -89,7 +125,7 @@
         <td><input class="inpupdate" type="text" id="numInp"></td>
     </tr>
     <tr>
-        <td><button id="subtn" style="padding: 5px; border: none; border-radius: 5px; cursor: pointer;">Submit</button></td>
+        <td><button id="updateBtn" style="padding: 5px; border: none; border-radius: 5px; cursor: pointer;">Update</button></td>
     </tr>
    </table>
    </div>
