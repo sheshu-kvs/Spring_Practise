@@ -14,13 +14,32 @@
 
     body {
       background-color: #F8F7BA;
+      font-family: cursive;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+   
+    header{
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      padding: 20px;
+      width: 100vw;
+      background-color: #FFDCA9;
+    }
+    a{                                    
+      text-decoration: none;
     }
 
     .main-container {
+      margin-top:50px ;
+       margin-bottom:50px ;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: center;  
       min-height: 80vh;
+      gap: 10px;
+      padding: 8 rem;
     }
 
     .btn-conatainer {
@@ -28,16 +47,25 @@
       background-color: #8cddb6;
       border-radius: 15px;
     }
-
+    .uploadContainer{
+      background-color: #8cddb6;
+      padding: 7rem;
+      border-radius: 15px;
+    }
+   
     button {
       border-radius: 10px;
       padding: 0.5rem;
     }
-
+/* 
     .imageContainer {
       display: flex;
-      justify-content: space-between;
+      justify-content:center;
+      gap: 10px;
       flex-wrap: wrap;
+      box-sizing: border-box;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
     img {
@@ -45,41 +73,60 @@
       height: 150px;
       border-radius: 15px;
       transition: transform 0.2s ease;
-    }
+    } */
+     /* Using the Grid  */
+
+     .imageContainer{
+      display: grid;                      
+      grid-template-columns: repeat(4,minmax(250px,1fr));
+      gap: 10px; 
+      justify-content: center;
+      padding: 0px 40px 0px 30px ;
+      width: 100%;
+      box-sizing: border-box;
+     }
+     .imageContainer img {
+      width: 100%;
+      height: 150px;
+      border-radius: 15px;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+
+     }
+    
 
     img:hover {
-      transform: scale(1.05);
+      transform: scale(1.10);
     }
   </style>
 </head>
 
 <body>
-  <h2>Upload An Image</h2>
 
-  <form id="uploadForm">
-    <input type="file" id="fileinput">
-    <button type="submit">Upload</button>
-  </form>
-  <p id="dispmessage"></p>
+  
+   <header>
+    <h2>Images With The Crud Operations</h2>
+    <a href="index.html"><span>Click To Home</span></a>
+  </header>
+
+
   <div class="main-container">
     <div class="btn-conatainer">
       <button id="getAllbtn">Get All Images</button><br>
-      <button id="delbtn">Delete</button>
+    </div>
+    <div class="uploadContainer">
+      <h2>Upload An Image</h2>
+      <form id="uploadForm">
+        <input type="file" id="fileinput">
+        <button type="submit">Upload</button>
+      </form>
+      <p id="dispmessage"></p>
     </div>
   </div>
-
+    <!-- Image Container -->
   <div class="imageContainer">
 
   </div>
-
-
-  <!-- To delete an image we need to take the input from the user -->
-  <div class="getContainer" style="display: none;">
-    <label for="" id="label">Enter the Id: </label>
-    <input type="num" id="numInp">
-  </div>
-
-
 
 
   <script>
@@ -88,8 +135,11 @@
     const baseurl = "http://localhost:8080/img";
     let imageContainer = document.querySelector(".imageContainer");  // where the images can be display
     let getAllImg = document.querySelector("#getAllbtn");
+
+
     async function FetchAllImages() {
       try {
+
         let response = await fetch(baseurl);
         let EachImg = await response.json();
         imageContainer.innerHTML = "";
@@ -102,6 +152,7 @@
           eachImageContainer.style.display = "flex";
           eachImageContainer.style.flexDirection = "column";
           eachImageContainer.style.padding = "10px";
+          eachImageContainer.style.position="relative"
 
 
 
@@ -118,6 +169,7 @@
 
 
           let btnContainer = document.createElement("div");
+          btnContainer.className="Twobtns";
           btnContainer.style.display = "flex";
           btnContainer.style.justifyContent = "flex-end"; // align buttons to right
           btnContainer.style.marginTop = "1px";
@@ -151,7 +203,10 @@
 
 
           editbutton.addEventListener("click", async () => {
-
+              // let imageContainer = document.querySelector(".imageContainer"); 
+              // imageContainer.style.display="none";
+                let main = document.querySelector(".main-container");
+                main.style.display="none";
 
             // Modal Creation 
 
@@ -163,18 +218,26 @@
             modal.style.display = "flex";
             modal.style.alignItems = "center"
             modal.style.justifyContent = "center";
+            // modal.style.position="fixed";
 
 
             // Form Container
             const card = document.createElement("div");
             card.style.padding = "20px";
             card.style.width = "400px";
+            card.style.position="absolute";
+            card.style.backgroundColor="#8B7E74"
+            card.style.borderRadius="15px";
+            card.style.borderColor="black";
+            card.style.top="150px";
+            
 
 
             // title
 
             let title = document.createElement("h3");
             title.textContent = "Edit Image";
+            title.style.color=""
 
 
             // Current Image Preview
@@ -229,6 +292,9 @@
 
             cancelBtn.addEventListener("click", () => {
               modal.remove(); //close the modal
+             // FetchAllImages();
+                //   let main = document.querySelector(".main-container");
+                // main.style.display="inline-block";
             })
 
 
@@ -256,38 +322,38 @@
 
               formData.append("imagename", newname || img.imagename); // always send name
               if (file) formData.append("file", file);                // optional
-                //appends the new name;
+              //appends the new name;
 
 
-                try {
-                  const response = await fetch(`${baseurl}/${img.id}`, {
-                    method: "PUT",
-                    body: formData
-                  });
+              try {
+                const response = await fetch(`${baseurl}/${img.id}`, {
+                  method: "PUT",
+                  body: formData
+                });
 
-                  if (response.ok) {
-                    // Update image preview in the UI
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = () => {
-                        eachImgTag.src = reader.result;   // Replace displayed image
-                        img.imagename = newName;           // Update local data
-                      };
-                      reader.readAsDataURL(file);
-                    } else {
-                      img.imagename = newname;           // Only name changed
-                    }
-
-                    modal.remove(); // Close modal
-                    alert("Image updated successfully!");
+                if (response.ok) {
+                  // Update image preview in the UI
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      eachImgTag.src = reader.result;   // Replace displayed image
+                      img.imagename = newName;           // Update local data
+                    };
+                    reader.readAsDataURL(file);
                   } else {
-                    alert("Failed to update image");
+                    img.imagename = newname;           // Only name changed
                   }
-                } catch (err) {
-                  console.error(err);
-                  alert("Error updating image");
+
+                  modal.remove(); // Close modal
+                  alert("Image updated successfully!");
+                } else {
+                  alert("Failed to update image");
                 }
-              
+              } catch (err) {
+                console.error(err);
+                alert("Error updating image");
+              }
+
             })
 
 
@@ -299,17 +365,17 @@
 
             card.appendChild(title);
             card.appendChild(preview);
-             card.appendChild(nameLabel);
-              card.appendChild(nameInput);
-              card.appendChild(fileinput);
-              card.appendChild(buttonContainer);
+            card.appendChild(nameLabel);
+            card.appendChild(nameInput);
+            card.appendChild(fileinput);
+            card.appendChild(buttonContainer);
 
 
 
-               modal.appendChild(card);
+            modal.appendChild(card);
 
 
-                document.body.appendChild(modal); 
+            document.body.appendChild(modal);
 
 
           })
@@ -388,105 +454,102 @@
     }
 
 
-    // FetchAllImages();
-
+    
+// this addevent listener work like this when the user clicks the getAllImg btn the all the Images 
+// Will be displayed...
     getAllImg.addEventListener("click", FetchAllImages);
 
 
-    // to Uplaod An Image Form
+    // to Upload An Image Form
     let uploadForm = document.querySelector("#uploadForm");
     let message = document.querySelector("#dispmessage");
 
-    let uploadurl="http://localhost:8080/img/upload";
+    let uploadurl = "http://localhost:8080/img/upload";
 
 
-    uploadForm.addEventListener("submit", async (e)=>{
+    uploadForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // message.innerHTML=""
 
       let fileinput = document.querySelector("#fileinput");
-        const file = fileinput.files[0];   //the first  selected file 
+      const file = fileinput.files[0];   //the first  selected file 
 
       const formdata = new FormData();
 
-      formdata.append("file",file);
+      formdata.append("file", file);
 
 
-      try{
-        const response = await fetch(uploadurl,{
-          method:'POST',
-          body:formdata
+      try {
+        const response = await fetch(uploadurl, {
+          method: 'POST',
+          body: formdata
         });
 
 
-        if(response.ok){
-          message.innerHTML=`Image Uplaoded Successfully`;
-          // FetchAllImages();
+        if (response.ok) {
+          message.innerHTML = `Image Uplaoded Successfully`;
         }
-        else{
-          message.innerHTML=`Geting some error to uploada the image`;
+        else {
+          message.innerHTML = `Please Add The Image`;
         }
-
-
       }
-      catch(err){
+      catch (err) {
         console.error(err);
       }
-
-
     })
 
 
 
     // to delete an image 
 
-    let deletebtn = document.querySelector("#delbtn");
+    // let deletebtn = document.querySelector("#delbtn");
     // const deleteurl="http://localhost:8080/img/id"
 
-    deletebtn.addEventListener("click", async () => {
-      document.querySelector(".getContainer").style = "inline-block";
-      let id = document.querySelector("#numInp").value;
-      if (!id) {
-        alert("please Enter the Id");
-        return;
-      }
+    // deletebtn.addEventListener("click", async () => {
+    //   document.querySelector(".getContainer").style = "inline-block";
+    //   let id = document.querySelector("#numInp").value;
+    //   if (!id) {
+    //     alert("please Enter the Id");
+    //     return;
+    //   }
 
 
-      if (!confirm(`Are you sure u want to delete!! ${id}`)) {
-        return;
-      }
+    //   if (!confirm(`Are you sure u want to delete!! ${id}`)) {
+    //     return;
+    //   }
 
-      try {
+    //   try {
 
-        const resp = await fetch(`${baseurl}/${id}`, {
-          method: 'DELETE'
-        });
+    //     const resp = await fetch(`${baseurl}/${id}`, {
+    //       method: 'DELETE'
+    //     });
 
-        let data = await resp.text();
-        alert(`${data}`);
+    //     let data = await resp.text();
+    //     alert(`${data}`);
 
-        if (resp.ok) {
-          alert(`${data}`);
-          FetchAllImages();
-        }
-        else {
-          alert(`${data}`);
+    //     if (resp.ok) {
+    //       alert(`${data}`);
+    //       FetchAllImages();
+    //     }
+    //     else {
+    //       alert(`${data}`);
 
-        }
+    //     }
 
 
 
-        // clearing the input 
-        document.querySelector("#numInp").value = "";
-        document.querySelector("#numInp").style.display = "none";
-        document.querySelector("#label").style.display = "none";
+    //     // clearing the input 
+    //     document.querySelector("#numInp").value = "";
+    //     document.querySelector("#numInp").style.display = "none";
+    //     document.querySelector("#label").style.display = "none";
 
-      }
-      catch (err) {
-        console.error(err);
-        alert("Deleteion failed");
-      }
+    //   }
+    //   catch (err) {
+    //     console.error(err);
+    //     alert("Deleteion failed");
+    //   }
 
-    })
+    // })
 
 
 

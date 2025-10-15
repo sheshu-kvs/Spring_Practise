@@ -69,7 +69,7 @@ public Image UpdateImg(
 ) throws IOException {
 
     // Fetch existing image from DB
-    Image img = imageservice.getImageById(id); // make a method to get existing record
+    Image img = imageservice.getImageById(id); 
 
     // Update name
     img.setImagename(imagename);

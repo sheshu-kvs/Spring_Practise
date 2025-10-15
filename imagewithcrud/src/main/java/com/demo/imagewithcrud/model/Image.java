@@ -14,7 +14,8 @@ public class Image{
     private String imagename;
     private String  imagetype;
     @Lob                       //this will be the Large Binary Object it will store the image file like the 
-    private byte[] imagedata;  //we are storing the data in the form  of the byte format...
+    private byte[] imagedata;  //we are storing the data in the form  of the byte format... 
+                               // i,e is the byte array...
     
     
     public Image() {
