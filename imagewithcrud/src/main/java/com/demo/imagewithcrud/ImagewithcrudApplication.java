@@ -8,7 +8,7 @@ public class ImagewithcrudApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ImagewithcrudApplication.class, args);
-		System.out.println("Hello Spring With the Image");
+		System.out.println("Hi! This is the Spring With The Image ");
 	}
 }
 	
