@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2{
+            color: blue;
+            font-size: 2vw;
+            border: 2px solid black;
+            
+        }
+    </style>
+</head>
+<body>
+    <h2 id="head">This is the controller class accessing from the spring </h2>
+    <script>
+        let txt = document.getElementById("head");
+
+        txt.addEventListener("click",()=>{
+          txt.style.color="green";
+        })
+    </script>
+</body>
+</html>
