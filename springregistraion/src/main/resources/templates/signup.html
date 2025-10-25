@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .main-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        margin-top: 80px;
+        margin-bottom: 90px;
+        align-items: center;
+        text-align: center;
+      }
+      .content {
+        background-color: rgb(24, 22, 22);
+        height: 463px;
+        padding: 40px;
+      }
+
+      body {
+        background-color: black;
+        font-family: cursive;
+      }
+
+      .second-container {
+        background-color: #18311d;
+        padding: 19px;
+      }
+
+      input {
+        background-color: #18311d;
+        color: white;
+        padding: 42px;
+        width: 350px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #6ec5c2;
+      }
+
+      #btn {
+        padding: 10px;
+        width: 150px;
+        border: 2px solid #2ed6d1;
+        background-color: black;
+        color: white;
+        border-radius: 7px;
+        margin-top: 30px;
+        margin-left: 10%;
+        cursor: pointer;
+      }
+      img {
+        padding: 20px;
+        border-radius: 50%;
+      }
+      input:hover,
+      input:focus {
+        border-bottom: 1px solid yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-box">
+      <div class="content">
+        <h2>Mission to Deep Space</h2>
+        <img src="circleimg.png" alt="" />
+        <p>The Future is Here</p>
+      </div>
+      <div class="second-container">
+        <form action="">
+          <h2 id="h2">Sign Up</h2>
+          <input type="text" placeholder="UserName" id="username" /><br />
+          <input type="email" placeholder="Email" id="email" /><br />
+          <input type="password" placeholder="Password" id="password" /><br />
+          <input type="password" placeholder="confirmpassword" id="confirmpassword">
+          <button id="btn">Register</button><br />
+          <a
+            href="SingleLogin.html"
+            style="color: #2ed6d1; text-decoration: none; font-size: 15px"
+            >Click Back</a
+          >
+        </form>
+      </div>
+    </div>
+  </body>
+  <!-- <script>
+    let userName = document.getElementById("username");
+    let password = document.getElementById("password");
+    let email = document.getElementById("email");
+    let btn = document.getElementById("btn");
+
+    let obj = [];
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      let user = {
+        UserName: userName.value,
+        Password: password.value,
+        Email: email.value,
+        
+      };  
+      obj.push(user);
+
+      userName.value = "";
+      password.value = "";
+      email.value = "";
+
+      for (let val of obj) {
+        console.log(val);
+      }
+    });
+  </script> -->
+<script>
+  let subbtn = document.getElementById("btn");
+  subbtn.addEventListener("click",(val)=>{
+    val.preventDefault();
+       let username = document.getElementById('username').value;
+       let email = document.getElementById('email').value;
+       let password = document.getElementById('password').value;
+       let confirmpassword = document.getElementById('confirmpassword').value;
+
+       let data = {
+        username,
+        email,
+        password,
+      };
+      if(password == confirmpassword){
+        //converts object to the Json format
+        const jsonData = JSON.stringify(data);
+
+        fetch("/req/signup",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:jsonData
+        })
+        .then(resp=>{
+
+        })
+      }
+  });
+</script>
+  </html>

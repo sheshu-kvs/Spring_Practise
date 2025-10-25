@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .main-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        margin-top: 80px;
+        margin-bottom: 90px;
+        align-items: center;
+        text-align: center;
+      }
+
+      body {
+        background-color: black;
+        font-family: cursive;
+      }
+
+      .second-container {
+        background-color: #18311d;
+        padding: 30px;
+      }
+
+      input {
+        background-color: #18311d;
+        color: white;
+        padding: 42px;
+        width: 350px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #6ec5c2;
+      }
+      input:hover,
+      input:focus {
+        border-bottom: 1px solid yellow;
+      }
+      #btn {
+        padding: 10px;
+        width: 150px;
+        border: 2px solid #2ed6d1;
+        background-color: black;
+        color: white;
+        border-radius: 7px;
+        margin-top: 30px;
+        margin-left: 2%;
+        cursor: pointer;
+      }
+
+     
+    </style>
+  </head>
+  <body>
+    <!-- function checkVal(a,idx){
+        for(let i=0;i<a.length;i++){
+          if(a[i]===idx){
+            return "Found";
+          }
+        }
+        // console.log("Not Found");
+        return "not Found";
+      }
+
+      let a=[10,20,30,40];
+      let idx=150;
+      // console.log(checkVal(a,idx)); -->
+
+    <div class="main-box">
+      <div class="second-container">
+        <form action="">
+          <h2 id="h2">Sign In</h2>
+          <input id="username" type="text" placeholder="UserName" /><br />
+          <input id="pas" type="password" placeholder="Password" /><br />
+          <!-- <input type="emai" placeholder="Email" /><br /> -->
+          <button id="btn">Login</button><br>
+          <a href="singlepagehtmltask.html"  style="color: #2ed6d1; text-decoration:none; font-size: 15px;">Click To Register</a>
+        </form>
+      </div>
+    </div>
+    <script>
+    //   let arr = [{ username: "sheshu", password: "1234" }];
+    //   let realuser = document.getElementById("username");
+    //   let realpas = document.getElementById("pas");
+    //   let body=document.body;
+
+
+    //    let arr_objects=[
+    //     {username:"sheshu",password:"1234"},
+    //     {username:"abcd",password:"2314"}
+    //   ];
+
+     
+
+
+    //   btn.onclick = function (val) {
+    //     // console.log(realuser.value);
+    //     // console.log(realpas.value);
+    //     val.preventDefault();
+      
+    //     let flag=false;
+    //   for( let user of arr_objects ){
+    //     if(user.username === realuser.value && user.password === realpas.value){
+    //     body.style.backgroundColor="green";
+    //     flag=true;
+    //     break;
+    //   }
+    //   }
+    //   if(flag){
+    //     window.location.href="DivTagsUsingForLoop.html"
+    //   } 
+    //   else{
+    //     body.style.backgroundColor="red";
+    //   }
+
+      
+    //     realpas.value="";
+    //     realuser.value=""
+
+    //   };
+
+   
+    </script>
+  </body>
+</html>
