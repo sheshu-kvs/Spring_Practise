@@ -4,86 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
-    <style>
-      * {
+   <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+     * {
         margin: 0px;
         padding: 0px;
         box-sizing: border-box;
       }
-      .main-box {
+      html{
+      }
+      body{
+          background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 100vh;
+          background-size: cover;
+          color: white;
+      }
+      .main-box{
         display: flex;
         justify-content: center;
-        color: white;
-        margin-top: 80px;
-        margin-bottom: 90px;
         align-items: center;
+        height: 100vh;
+      }
+      .login-box{
+          padding: 2vw 3vw;
+          background-color: transparent;
+         border: 1px solid white;
+         border-radius: 2vw;
+      }
+      .login-box h2{
+        text-align: center;
+        /* margin-bottom: 0.1vw; */
+      }
+
+      input{
+       padding: 2vw;
+       background-color:transparent ;
+       border: none;
+       outline: none;
+      }
+      #username,#password,#confirmpassword,#email{
+        border-bottom: 2px solid white;
+      }
+      #btn{
+        padding: 1vw ;
+        width: 200px;
+        border-radius: 5vw;
+        background-color: #f09bcf;
+        border: none;
+        margin-top: 1vw;
+      }
+      form p{
+        margin-top: 2vw;
         text-align: center;
       }
-      .content {
-        background-color: rgb(24, 22, 22);
-        height: 463px;
-        padding: 40px;
-      }
-
-      body {
-        background-color: black;
-        font-family: cursive;
-      }
-
-      .second-container {
-        background-color: #18311d;
-        padding: 19px;
-      }
-
-      input {
-        background-color: #18311d;
+      .username{
         color: white;
-        padding: 42px;
-        width: 350px;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid #6ec5c2;
       }
 
-      #btn {
-        padding: 10px;
-        width: 150px;
-        border: 2px solid #2ed6d1;
-        background-color: black;
-        color: white;
-        border-radius: 7px;
-        margin-top: 30px;
-        margin-left: 10%;
-        cursor: pointer;
-      }
-      img {
-        padding: 20px;
-        border-radius: 50%;
-      }
-      input:hover,
-      input:focus {
-        border-bottom: 1px solid yellow;
-      }
-    </style>
+
+   </style>
   </head>
   <body>
     <div class="main-box">
-      <div class="content">
-        <h2>Mission to Deep Space</h2>
-        <img src="circleimg.png" alt="" />
-        <p>The Future is Here</p>
-      </div>
-      <div class="second-container">
-        <form action="">
+      
+      <div class="login-box">
+        <form action="" method="post">
           <h2 id="h2">Sign Up</h2>
           <input type="text" placeholder="UserName" id="username" /><br />
           <input type="email" placeholder="Email" id="email" /><br />
           <input type="password" placeholder="Password" id="password" /><br />
-          <input type="password" placeholder="confirmpassword" id="confirmpassword">
+          <input type="password" placeholder="confirmpassword" id="confirmpassword"></br>
           <button id="btn">Register</button><br />
           <a
-            href="SingleLogin.html"
-            style="color: #2ed6d1; text-decoration: none; font-size: 15px"
+            href="login.html"
             >Click Back</a
           >
         </form>
@@ -135,7 +134,7 @@
         //converts object to the Json format
         const jsonData = JSON.stringify(data);
 
-        fetch("/req/signup",{
+        fetch("http://localhost:8080/req/signup",{
           method:"POST",
           headers:{
             "Content-Type":"application/json"

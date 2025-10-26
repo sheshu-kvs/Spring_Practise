@@ -2,6 +2,7 @@ package com.example.springregistraion.service;
 
 import java.util.Optional;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,11 +37,14 @@ public class MyAppuserService implements UserDetailsService {
             return User.builder()
             .username(userObj.getUsername())
             .password(userObj.getPassword())
+             .roles("USER")  // Important!
             .build();
         }
         else{
             throw new  UsernameNotFoundException(username);
         }
+
+        
     }
 
 

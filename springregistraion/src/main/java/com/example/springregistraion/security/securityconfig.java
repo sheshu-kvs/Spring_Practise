@@ -1,6 +1,5 @@
 package com.example.springregistraion.security;
 
-import java.security.AuthProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,9 +9,11 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.springregistraion.service.MyAppuserService;
@@ -50,9 +51,6 @@ public class securityconfig {
         return new BCryptPasswordEncoder();
     }
 
-
-
-
     
 
 
@@ -66,20 +64,25 @@ public class securityconfig {
         // 
         .csrf(AbstractHttpConfigurer::disable)
 
-        // how user can login our webapge
-            .formLogin(httpForm ->{
-                httpForm.loginPage("/login").permitAll();
-                //after user login the page means it will redirect to this page
-                httpForm.defaultSuccessUrl("/index");
-              })
-            //   we need to use the registration page without the authentication..
 
-            .authorizeHttpRequests(register->{
+         .authorizeHttpRequests(register->{
                 // specifying the url for the registration page..
                 register.requestMatchers("/req/**").permitAll();
                 // user can frelly register without the authenticartion
                 register.anyRequest().authenticated();
             })
+
+
+
+        // how user can login our webapge
+            .formLogin(httpForm ->{
+                httpForm.loginPage("/login").permitAll();
+                //after user login the page means it will redirect to this page
+                httpForm.defaultSuccessUrl("/index",true);
+              })
+            //   we need to use the registration page without the authentication..
+
+           
 
 
 
