@@ -11,4 +11,8 @@ import com.example.springregistraion.model.MyAppuser;
 public interface MyAppRepo extends JpaRepository<MyAppuser,Long>{
 
     Optional<MyAppuser> findByUsername(String username);
+
+  
+
+
 }

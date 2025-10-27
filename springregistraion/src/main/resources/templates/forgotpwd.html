@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password...</title>
+     <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html{
+      }
+      body{
+          background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
+          /* background-image: url(); */
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 100vh;
+          background-size: cover;
+      }
+      .main-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .login-box{
+          padding: 2vw 3vw;
+          background-color: transparent;
+         border: 1px solid white;
+         border-radius: 2vw;
+      }
+      .login-box h2{
+        text-align: center;
+        /* margin-bottom: 0.1vw; */
+      }
+
+      input{
+       padding: 2vw;
+       background-color:transparent ;
+       border: none;
+       outline: none;
+      }
+      #username,#password{
+        border-bottom: 2px solid white;
+      }
+      #btn{
+        padding: 1vw ;
+        width: 200px;
+        border-radius: 5vw;
+        background-color: #f09bcf;
+        border: none;
+        margin-top: 1vw;
+      }
+      form p{
+        margin-top: 2vw;
+        text-align: center;
+      }
+      .username{
+        color: white;
+      }
+
+
+      
+    
+
+     
+
+
+     
+    </style>
+</head>
+<body>
+    
+     <div class="main-box">
+      
+      <div class="login-box">
+        <form action="" method="post">
+          <h2 id="h2">Forgot Password</h2>
+          <input type="text" placeholder="UserName" id="username" /><br />
+          <input type="password" placeholder="Password" id="password" /><br />
+          <a href="/login"><button id="btn">Submit</button></a>
+        
+        </form>
+      </div>
+    </div>
+    <script>
+       
+        let button = document.getElementById("btn");
+      
+        button.addEventListener("click",(e)=>{
+
+            e.preventDefault();
+
+             let username = document.getElementById("username").value;
+        let pwd = document.getElementById("password").value;
+
+          let Jsondata ={
+            username:username,
+            password:pwd
+        }
+        // convert the object to the json format..
+        const jsondat  = JSON.stringify(Jsondata);
+            fetch("http://localhost:8080/req/updatepwd",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:jsondat
+            })
+            .then(rep=>{
+
+            })
+        })
+
+
+    </script>
+</body>
+</html>

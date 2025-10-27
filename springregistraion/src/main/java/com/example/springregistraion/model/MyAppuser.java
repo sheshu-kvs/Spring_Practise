@@ -14,13 +14,15 @@ public class MyAppuser {
     private String username;
     private String email;
     private String password;
+    private String role;
     public MyAppuser() {
     }
-    public MyAppuser(Long id, String username, String email, String password) {
+    public MyAppuser(Long id, String username, String email, String password, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
     public Long getId() {
         return id;
@@ -46,6 +48,18 @@ public class MyAppuser {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+ 
+
+
+
+
+    
 
 
     

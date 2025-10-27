@@ -78,6 +78,7 @@
           <h2 id="h2">Sign Up</h2>
           <input type="text" placeholder="UserName" id="username" /><br />
           <input type="email" placeholder="Email" id="email" /><br />
+          <input type="text" placeholder="Role" id="role" /><br />
           <input type="password" placeholder="Password" id="password" /><br />
           <input type="password" placeholder="confirmpassword" id="confirmpassword"></br>
           <button id="btn">Register</button><br />
@@ -122,18 +123,20 @@
     val.preventDefault();
        let username = document.getElementById('username').value;
        let email = document.getElementById('email').value;
+       let role = document.getElementById('role').value;
        let password = document.getElementById('password').value;
        let confirmpassword = document.getElementById('confirmpassword').value;
 
        let data = {
         username,
         email,
+        role,
         password,
       };
       if(password == confirmpassword){
         //converts object to the Json format
         const jsonData = JSON.stringify(data);
-
+       
         fetch("http://localhost:8080/req/signup",{
           method:"POST",
           headers:{
@@ -146,5 +149,8 @@
         })
       }
   });
+
+  // when the user submits the form it will directly redirect here
+  
 </script>
   </html>

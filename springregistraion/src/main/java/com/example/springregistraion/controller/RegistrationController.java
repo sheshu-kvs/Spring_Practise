@@ -28,7 +28,8 @@ public class RegistrationController {
 
     @PostMapping("/req/signup")
     public MyAppuser newUser(@RequestBody MyAppuser user){
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("user");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return service.saveNewUser(user);
     }
 

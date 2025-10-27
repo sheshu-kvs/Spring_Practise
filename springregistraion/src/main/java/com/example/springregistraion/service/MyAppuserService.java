@@ -1,8 +1,9 @@
 package com.example.springregistraion.service;
 
+import java.util.List;
 import java.util.Optional;
 
-import org.springframework.context.annotation.Bean;
+import org.aspectj.weaver.ast.Call;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,10 +36,10 @@ public class MyAppuserService implements UserDetailsService {
         if(user.isPresent()){
             var userObj = user.get();
             return User.builder()
-            .username(userObj.getUsername())
-            .password(userObj.getPassword())
-             .roles("USER")  // Important!
-            .build();
+             .username(userObj.getUsername())
+             .password(userObj.getPassword())
+             .roles(userObj.getRole())
+             .build();
         }
         else{
             throw new  UsernameNotFoundException(username);
@@ -53,5 +54,14 @@ public class MyAppuserService implements UserDetailsService {
     public MyAppuser saveNewUser(MyAppuser myuser){
         return repo.save(myuser);
     }
+
+
+    public MyAppuser findbyusername(String username){
+        Optional<MyAppuser> user=repo.findByUsername(username);
+        return user.orElse(null);
+    }
+
+  
+  
     
 }

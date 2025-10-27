@@ -21,4 +21,19 @@ public class contentcontroller {
    public String GetDat(){
     return "index";
    } 
+//    forgot pwd html file
+
+   @GetMapping("/forgotpwd")
+   public String forgotPwd(){
+    return "forgotpwd";
+   }
+
+//    admin dashboard 
+
+   @GetMapping("/admin")
+   public String adminDash(){
+    return "admdashboard";
+   }
+
+
 }
