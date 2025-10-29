@@ -40,8 +40,8 @@ file.transferTo(new File("path")) → to save it on disk */
 
 
                                     // Saving the File to the Disk..
-                                    
-                                    String uploadDir = "uploads/";
+                                                                                  
+                                     String uploadDir = "uploads/";
 
                                      Files.createDirectories(Paths.get(uploadDir));
 

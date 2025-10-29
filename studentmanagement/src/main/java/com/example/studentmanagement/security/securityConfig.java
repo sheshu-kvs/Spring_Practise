@@ -3,7 +3,6 @@ package com.example.studentmanagement.security;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,9 +22,38 @@ import com.example.studentmanagement.service.studentservice;
 @Configuration
 @EnableWebSecurity
 public class securityConfig {
+
+    /*
+     * | Step | Who Handles It                | Description                                              |
+| ---- | ----------------------------- | -------------------------------------------------------- |
+| 1    | **Browser (HTML Form)**       | User fills the form → `POST /login`                      |
+| 2    | **Spring Security Filter**    | Intercepts `/login`, reads `username` and `password`     |
+| 3    | **AuthenticationManager**     | Calls your `UserDetailsService.loadUserByUsername()`     |
+| 4    | **UserDetailsService**        | Finds user in DB, returns `UserDetails` object           |
+| 5    | **PasswordEncoder**           | Verifies the entered password with stored hash           |
+| 6    | **SuccessHandler / Redirect** | Redirects user based on role                             |
+| 7    | **Controller**                | Finally renders correct page (`user.html`, `admin.html`) |
+
+
+
+
+| Concept                            | Why It Matters                        |
+| ---------------------------------- | ------------------------------------- |
+| Form action `/login` (POST)        | Connects your HTML to Spring Security |
+| Field names `username`, `password` | Required for Spring to read values    |
+| `@GetMapping("/login")`            | Shows login page                      |
+| `UserDetailsService`               | Fetches user from DB                  |
+| `PasswordEncoder`                  | Validates passwords                   |
+| Role names (`ROLE_ADMIN`)          | Determines page redirection           |
+| SuccessHandler                     | Controls where user goes after login  |
+| Debug Logs                         | Show exactly what went wrong          |
+
+
+
+     */
     
-
-
+// @Autowired
+// private UserDetailsService userdetailservice;
 
 
     @Bean
@@ -34,9 +62,9 @@ public class securityConfig {
     } 
 
     @Bean
-    public AuthenticationProvider authenticationProvider(studentservice servicecls){
+    public AuthenticationProvider authenticationProvider(studentservice service){
         DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
-        provider.setUserDetailsService(servicecls);
+        provider.setUserDetailsService(service);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
@@ -57,13 +85,13 @@ public class securityConfig {
 
         .formLogin(httpform->
             httpform.loginPage("/login").permitAll()
-            .defaultSuccessUrl("/index",true)
+            // .defaultSuccessUrl("/index",true)
 
             .successHandler((request,response,authentication)->{
             Collection <? extends GrantedAuthority> authority=authentication.getAuthorities();
             for(GrantedAuthority authority2:authority){
                 String role=authority2.getAuthority();
-                System.out.println("Role"+role);
+                System.out.println("Role "+role);
                 if(role.equals("ROLE_ADMIN")){
                     response.sendRedirect("/admin");
                     return;

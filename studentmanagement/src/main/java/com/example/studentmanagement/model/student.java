@@ -24,11 +24,7 @@ public class student {
        public student() {
        }
 
-
        
-
-
-
         public student(long id, String name, String qualification, String email, String address, String role,
          String password, String filepath) {
         this.id = id;
@@ -41,18 +37,9 @@ public class student {
         this.filepath = filepath;
     }
 
-
-
-
-
-
          public String getRole() {
            return role;
          }
-
-
-
-
 
     public void setRole(String role) {
         this.role = role;
@@ -108,9 +95,4 @@ public class student {
     public void setFilepath(String filepath) {
         this.filepath = filepath;
     }
-
-    
-
-
-
 }
