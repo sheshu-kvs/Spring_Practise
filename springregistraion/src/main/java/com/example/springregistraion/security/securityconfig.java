@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.example.springregistraion.service.MyAppuserService;
 
 @Configuration
@@ -51,7 +50,7 @@ public class securityconfig {
         // this DaoAuthenticationProvide uses a db to authenticate userservice
        
         provider.setPasswordEncoder(passwordEncoder());
-        // here it is comparing the when the user logins :login pwd and the ecoded pwd
+        // here it is comparing the when the user logins :login pwd and the encoded pwd
 
         return provider;
     }   
@@ -107,7 +106,7 @@ public class securityconfig {
                 // it will redirect to the index page.. 
                 // httpForm.defaultSuccessUrl("/index",true);
                 httpForm.successHandler((request,response,authentication)->{
-                    Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+                    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
                     for(GrantedAuthority authority:authorities){
                         String role = authority.getAuthority();
@@ -124,12 +123,7 @@ public class securityconfig {
                     response.sendRedirect("/index");
                 });
               })
-            //   we need to use the registration page without the authentication..
-
-           
-
-
-
+            //   we need to use the registration page without the authentication
               .build();
     }
     

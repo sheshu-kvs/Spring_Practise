@@ -1,9 +1,7 @@
 package com.example.springregistraion.service;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.aspectj.weaver.ast.Call;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -45,9 +43,8 @@ public class MyAppuserService implements UserDetailsService {
             throw new  UsernameNotFoundException(username);
         }
 
-        
     }
-
+// “I tried X, I’m seeing this error, I expected Y. What am I missing?”
 
 
     @Transactional
@@ -57,7 +54,7 @@ public class MyAppuserService implements UserDetailsService {
 
 
     public MyAppuser findbyusername(String username){
-        Optional<MyAppuser> user=repo.findByUsername(username);
+        Optional<MyAppuser> user = repo.findByUsername(username);
         return user.orElse(null);
     }
 

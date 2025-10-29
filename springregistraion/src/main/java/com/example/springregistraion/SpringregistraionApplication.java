@@ -10,5 +10,4 @@ public class SpringregistraionApplication {
 		SpringApplication.run(SpringregistraionApplication.class, args);
 		System.out.println("This is the Registration Page Spring...");
 	}
-
 }	

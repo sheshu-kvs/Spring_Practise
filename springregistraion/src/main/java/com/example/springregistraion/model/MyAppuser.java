@@ -15,6 +15,7 @@ public class MyAppuser {
     private String email;
     private String password;
     private String role;
+    
     public MyAppuser() {
     }
     public MyAppuser(Long id, String username, String email, String password, String role) {
