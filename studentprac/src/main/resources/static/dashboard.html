@@ -5,16 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Dashboard</title>
   <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background-color: hwb(229 23% 12%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color:rgb(248, 224, 224) ;
+      color: black;
+      min-height: 80px;
+      padding: 1vw;
+    }
+    
+    .content3{
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
+      width: 99vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);;
+
     }
+
+    .content2{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+    }
+
     
     .card {
       background: white;
@@ -75,7 +103,18 @@
   </style>
 </head>
 <body>
-  <div class="card">
+  <nav>
+    <div class="content1">
+     <h3>Hello Welcome  </h3>  </div>
+    <div class="content2">
+      <p>Profile</p>
+      <p id="resumeLink">View Resume</p>
+      <p id="download">Download Resume</p>
+      <p>Logout</p>
+    </div>
+  </nav>
+  <div class="content3">
+    <div class="card">
     <h2>Welcome, <span id="username">User</span></h2>
     
     <div class="info-item">
@@ -95,10 +134,11 @@
     
     <div class="info-item">
       <span class="info-label">Resume:</span>
-      <a href="#" id="resumeLink" class="resume-link" target="_blank">View Resume</a>
+      <a href="" id="resumeLink" class="resume-link" >View Resume</a>
     </div>
     
     <a href="/logout" class="logout-btn">Logout</a>
+  </div>
   </div>
 
   <script>
@@ -118,14 +158,22 @@
         document.getElementById("qualification").textContent = user.qualification || "N/A";
         document.getElementById("address").textContent = user.address || "N/A";
         
-        // Set resume link
-        if (user.filepath) {
-          document.getElementById("resumeLink").href = "/" + user.filepath;
-        } else {
-          document.getElementById("resumeLink").style.display = "none";
-        }
+        
+                let filepath =  user.filepath;
+                 let filename = filepath.substring(Math.max(filepath.lastIndexOf('/'), filepath.lastIndexOf('\\')) + 1);
+                let resumeurl = `/users/resume/${filename}`;
+                let downloadurl = `/users/download/${filename}`;
+
+                 document.getElementById('resumeLink').onclick=function() {
+                  window.open(resumeurl,"_blank");
+                }
+
+                document.getElementById('download').onclick=function(){
+                  window.open(resumeurl,"_blank");
+                }
+
       } 
-      catch (err) {
+      catch (err) {   
         console.error("Error loading user details:", err);
         alert("Unable to load your profile. Please log in again.");
       }

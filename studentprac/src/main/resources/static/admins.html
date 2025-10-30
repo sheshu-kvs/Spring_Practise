@@ -4,18 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+     <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+      }
+    body {
+      font-family: Arial, sans-serif;
+      /* background-color: hwb(229 23% 12%); */
+      /* min-height: 100vh; */
+      /* padding: 20px; */
+    }
+      nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgb(143, 137, 137);
+      color: black;
+      margin-bottom: 1vw;
+      padding: 1vw;
+    } 
+    .content2{
+      display: flex;
+      justify-content: space-between;
+      gap: 2vw;
+    }
+    .content2 p{
+      cursor: pointer;
+    }
+    
+    .card {
+      background: rgb(250, 230, 230);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(17, 16, 16, 0.1);
+      padding: 25px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .usercontiner{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1vw;
+      gap: 20px;
+    }
+
+    
+    
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .info-item {
+      margin-bottom: 15px;
+    }
+    
+    .info-label {
+      font-weight: bold;
+      color: #555;
+      display: inline-block;
+      width: 120px;
+    }
+    
+    .info-value {
+      color: #333;
+    }
+    
+    .resume-link {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    
+    .resume-link:hover {
+      text-decoration: underline;
+    }
+    
+    .logout-btn {
+      display: inline-block;
+      background: #e74c3c;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      margin-top: 15px;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .logout-btn:hover {
+      background: #c0392b;
+    }
+    #btns{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
 </head>
 <body>
+   <nav>
+    <div class="content1">
+     <h3>Hello Welcome  </h3>  </div>
+    <div class="content2">
+      <p></p>
+      <p id="viewAllstu">View All Students</p>
+      <p>Logout</p>
+    </div>
+  </nav>
+
+
+  <div class="usercontiner">
+
+  </div>
 
 
 <script>
-     async function loadalluser() {
+
+   
+
+
+    let alldata = document.getElementById('viewAllstu');
+
+    alldata.addEventListener("click",()=>{
+        async function loadalluser() {
 
         let response = await fetch("/admins/dashboard");
-        let data = await response.json();
-        
-        
+        let studentlist = await response.json();
+
+        let container =  document.querySelector(".usercontiner")
+
+        container.innerHTML=""
+
+       studentlist.forEach( stu =>{
+        let card = document.createElement('div');
+        card.className="card"
+        card.innerHTML=`
+        <h2>Hello Welcome ${stu.name} </h2>
+        <p><b>Email: </b> ${stu.email}</p>
+        <p><b>Qualification: </b> ${stu.qualification}</p>
+        <p><b>Address: </b> ${stu.address} </p>
+        <div id="btns">
+        <button id=${stu.index}>Edit</button>
+        <button id=${stu.index}>Delete</button></div>
+        `;
+         container.appendChild(card);
+        });
+
     }
+
+    loadalluser();
+
+    })
+
+
 </script>    
 </body>
 </html>

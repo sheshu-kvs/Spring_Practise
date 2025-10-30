@@ -47,8 +47,10 @@ public class securityConfig {
 
 
         .authorizeHttpRequests(register ->
-           register.requestMatchers("/admin/**").hasRole("ADMIN")
+           register.requestMatchers("/users/resume/**","/users/download/").permitAll()
+           .requestMatchers("/admin/**").hasRole("ADMIN")
            .requestMatchers("/user/**").hasAnyRole("USER","ADMIN")
+          
            .requestMatchers("/signup").permitAll()
            .requestMatchers("/upload").permitAll()
            .anyRequest().authenticated()

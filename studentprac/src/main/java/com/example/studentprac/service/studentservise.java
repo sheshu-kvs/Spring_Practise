@@ -1,5 +1,6 @@
 package com.example.studentprac.service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,6 +8,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
+
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+
 
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +23,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.example.studentprac.model.student;
 import com.example.studentprac.repo.studentrepo;
 
@@ -33,6 +38,8 @@ public class studentservise implements UserDetailsService {
      @Autowired
      private PasswordEncoder passwordencoder;
 
+     String uploadDir = System.getProperty("user.dir") + "/studentprac/uploads/";
+
      public student savestudent(student stu){
         stu.setPassword(passwordencoder.encode(stu.getPassword()));
         return repo.save(stu);
@@ -41,13 +48,15 @@ public class studentservise implements UserDetailsService {
 // loadUserByUsername  this method will fetch the detils in the db if the user is present or not...
 
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException{
+         // here the an Optional is the Container... 
+        // getting the student name storing the in the optional conatiner 
         Optional<student> user = repo.findByName(name);
 
         if(user.isEmpty()){
             throw new UsernameNotFoundException(name);
         }
 
-
+      // here we are actully getting the student object...
         var userObj = user.get();
         String role = userObj.getRole();
 
@@ -120,8 +129,26 @@ public void updateResume(MultipartFile file,String name) throws IOException{
 
 }
 
+
+//here we are getting all the student object..
 public List<student> getAll(){
     return repo.findAll();
 }
 
+// to delete the student we are using the deleteby id
+
+public void  deletestu(long id){
+    repo.deleteById(id);
+}
+
+
+// to get the file in the
+public Resource getFileasResource(String filename) throws IOException{
+    Path path=Paths.get(uploadDir).resolve(filename).normalize();
+    Resource resource = new UrlResource(path.toUri());
+    if(!resource.exists()){
+        throw new FileNotFoundException("Enterd the file name was not found...");
+    }
+    return resource;
+} 
 }
