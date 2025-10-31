@@ -1,13 +1,17 @@
-package com.emp.employeemanagement.repository;
+    package com.emp.employeemanagement.repository;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.emp.employeemanagement.model.Emp;
 
 
@@ -70,6 +74,7 @@ public class EmpRepo{
          }
          return getEmpById(emp.getId());
     }
+   
 }
 
 
