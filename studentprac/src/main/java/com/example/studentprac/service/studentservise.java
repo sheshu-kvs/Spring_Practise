@@ -89,6 +89,8 @@ public student getStudent(String name){
 
 
 public student updateStudent(student stu){
+    // an optinal is the container we are storing the entire the student data in the one container..
+    // 
     Optional<student> existingstuOpt = repo.findById(stu.getId());
 
     if(existingstuOpt.isEmpty()){
@@ -98,35 +100,33 @@ public student updateStudent(student stu){
     existingstu.setName(stu.getName());
     existingstu.setAddress(stu.getAddress());
     existingstu.setEmail(stu.getEmail());
-    existingstu.setFilepath(stu.getFilepath());
+    existingstu.setQualification(stu.getQualification());
     return repo.save(existingstu);
 }
 
-public void updateResume(MultipartFile file,String name) throws IOException{
-    if(file.isEmpty()){
+public void updateResume(MultipartFile file, String name) throws IOException {
+    if (file.isEmpty()) {
         throw new IllegalStateException("Cannot Upload the Empty File");
-        }
-         String uploadDir = "studentprac/uploads/";
-         Path storageDir = Paths.get(uploadDir);
-         Files.createDirectories(storageDir);
+    }
 
+    String uploadDir = "studentprac/uploads/";
+    Path storageDir = Paths.get(uploadDir);
+    Files.createDirectories(storageDir);
 
-         String filename = file.getOriginalFilename();
-         Path filepath = storageDir.resolve(filename);
+    String filename = file.getOriginalFilename();
+    Path filepath = storageDir.resolve(filename);
 
-        Files.copy(file.getInputStream(),filepath,StandardCopyOption.REPLACE_EXISTING);
+    Files.copy(file.getInputStream(), filepath, StandardCopyOption.REPLACE_EXISTING);
 
-         Optional<student> stuOpt  = repo.findByName(name);
+    Optional<student> stuOpt = repo.findByName(name);
 
-        if(stuOpt.isPresent()){
+    if (stuOpt.isPresent()) {
         student stu = stuOpt.get();
         stu.setFilepath(filepath.toString());
         repo.save(stu);
-       }
-       else{
+    } else {
         throw new ResourceNotFoundException("student Not Found....");
-       }
-
+    }
 }
 
 
@@ -137,10 +137,18 @@ public List<student> getAll(){
 
 // to delete the student we are using the deleteby id
 
-public void  deletestu(long id){
+public void deletestudent(Long id){
+    if(!repo.existsById(id)){
+        throw new ResourceNotFoundException("student not found "+id);
+    }
     repo.deleteById(id);
 }
 
+
+public student getStudentById(long id) {
+    // Your implementation to find student by ID
+    return repo.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+}
 
 // to get the file in the
 public Resource getFileasResource(String filename) throws IOException{

@@ -144,7 +144,7 @@
   <script>
     async function loadPage() {
       try {
-        let response = await fetch("/users/dashboard");
+        let response = await fetch("/users/dashboard");  ///users/dashboard
 
         if (!response.ok) {
           throw new Error("Failed to load user data");
