@@ -65,10 +65,18 @@
     .btn-add:hover {
       background-color: #ff5722;
     }
+    .viewContainer{
+      display: flex;
+      justify-content: flex-end;
+    }
   </style>
 </head>
 <body>
-  <header>🍛 Menu</header>
+  <header>🍛 Menu
+    <div class="viewContainer">
+      <button onclick="view()">View</button>
+    </div>
+  </header>
 
   <div class="food-container" id="foodContainer"></div>
 
@@ -115,7 +123,7 @@
     }
 
     async function addToCart(food_id) {
-      const userId = localStorage.getItem("userid "); // Save userId when login success
+      const userId = localStorage.getItem("userid"); // Save userId when login success
       // if (!userId) {
       //   alert("Please login first!");
       //   return;
@@ -138,6 +146,11 @@
       } else {
         alert("Failed to add to cart");
       }
+    }
+
+
+    function view(){
+      window.location.href="cart.html";
     }
 
     // window.onload = fetchFoodItems;

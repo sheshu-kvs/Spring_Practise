@@ -37,9 +37,9 @@ public class cartController {
 
 
     // ✅ 1️⃣ Get all cart items by user ID
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> getCartItemsByUser(@PathVariable long userId) {
-        List<cart_item> items = cartService.getCartItemsByUserId(userId);
+    @GetMapping("/{user_id}")
+    public ResponseEntity<?> getCartItemsByUser(@PathVariable long user_id) {
+        List<cart_item> items = cartService.getCartItemsByUserId(user_id);  
 
         if (items.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

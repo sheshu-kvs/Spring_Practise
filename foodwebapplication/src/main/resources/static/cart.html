@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="styles/cart.css">
+</head>
+<body>
+
+<h1>Your Cart</h1>
+
+<div id="cart-items"></div>
+
+<h2>Total: ₹<span id="total-price">0</span></h2>
+
+<button id="checkout-btn">Proceed to Checkout</button>
+
+<script >
+    document.addEventListener("DOMContentLoaded", loadCart);
+
+async function loadCart() {
+    const userId = localStorage.getItem("userid");
+
+    let resp = await fetch(`http://localhost:8080/cart/${userId}`);
+    let data = await resp.json();
+
+    let cartDiv = document.getElementById("cart-items");
+    let total = 0;
+
+    cartDiv.innerHTML = "";
+
+    data.forEach(item => {
+        total += item.food.price * item.quantity;
+
+        cartDiv.innerHTML += `
+            <div class="cart-box">
+                <img src="http://localhost:8080/images/food/${item.food.image}" width="100">
+
+                <h3>${item.food.name}</h3>
+                <p>₹${item.food.price}</p>
+
+                <div class="qty">
+                    <button onclick="updateQty(${item.cartItemId}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateQty(${item.cartItemId}, 1)">+</button>
+                </div>
+
+                <p>Subtotal: ₹${item.food.price * item.quantity}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("total-price").innerText = total;
+}
+
+async function updateQty(id, change) {
+    await fetch(`http://localhost:8080/cart/update/${id}/${change}`, {
+        method: "PUT"
+    });
+
+    loadCart(); // reload page
+}
+
+</script>
+</body>
+</html>
