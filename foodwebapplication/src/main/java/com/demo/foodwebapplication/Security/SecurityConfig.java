@@ -11,22 +11,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/user/register","/user/login","/res/all").permitAll()
+                .anyRequest().permitAll()
+            );
 
-
-    @Bean   
-    public SecurityFilterChain securityfilterchain (HttpSecurity http) throws Exception{
-        return http
-
-        .csrf(AbstractHttpConfigurer::disable)
-
-       .authorizeHttpRequests(register->{
-        register.requestMatchers("/food/all").permitAll();
-       }
-       )
-        .build();
-
+        return http.build();
     }
-
-
-    
 }

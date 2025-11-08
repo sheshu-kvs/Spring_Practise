@@ -1,8 +1,8 @@
 package com.demo.foodwebapplication.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
@@ -13,18 +13,52 @@ public class food_item {
     private String name;
     private float price;
     private String description;
-    private long restaurant_id;
+    private long restaurantId;
+    private String imagepath;
+
+
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
 
     public food_item() {
     }
 
-    public food_item(String description, long food_id, String name, float price, long restaurant_id) {
+    public food_item(String description, long food_id, String imagepath, String name, float price, long restaurantId) {
         this.description = description;
         this.food_id = food_id;
+        this.imagepath = imagepath;
         this.name = name;
         this.price = price;
-        this.restaurant_id = restaurant_id;
+        this.restaurantId = restaurantId;
     }
+
+    
+
+
+
+
+
+
+
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(long restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+ 
+
+   
+
+    
 
     public long getFood_id() {
         return food_id;
@@ -58,13 +92,7 @@ public class food_item {
         this.description = description;
     }
 
-    public long getRestaurant_id() {
-        return restaurant_id;
-    }
-
-    public void setRestaurant_id(long restaurant_id) {
-        this.restaurant_id = restaurant_id;
-    }
+ 
 
 
     

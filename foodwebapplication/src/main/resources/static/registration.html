@@ -1,0 +1,668 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FoodExpress - Register</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            :root {
+                --primary: #ff6b6b;
+                --secondary: #4ecdc4;
+                --dark: #292f36;
+                --light: #f7fff7;
+                --accent: #ffe66d;
+            }
+
+            body {
+                background-color: #f9f9f9;
+                color: var(--dark);
+                line-height: 1.6;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Header & Navigation */
+            header {
+                background-color: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .logo {
+                font-size: 28px;
+                font-weight: 700;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .logo i {
+                margin-right: 10px;
+                color: var(--secondary);
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 30px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--dark);
+                font-weight: 600;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+            .nav-links a:hover {
+                color: var(--primary);
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            /* Auth Container */
+            .auth-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-grow: 1;
+                padding: 40px 0;
+            }
+
+            .auth-box {
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 450px;
+                overflow: hidden;
+            }
+
+            .auth-header {
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                color: white;
+                padding: 40px 30px;
+                text-align: center;
+            }
+
+            .auth-header h2 {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .auth-header p {
+                opacity: 0.9;
+            }
+
+            .auth-content {
+                padding: 30px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: var(--dark);
+            }
+
+            .input-with-icon {
+                position: relative;
+            }
+
+            .input-with-icon i {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 15px 15px 15px 45px;
+                border: 2px solid #eaeaea;
+                border-radius: 10px;
+                font-size: 16px;
+                transition: border-color 0.3s, box-shadow 0.3s;
+            }
+
+            .form-control:focus {
+                border-color: var(--secondary);
+                box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+                outline: none;
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;
+                cursor: pointer;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                padding: 15px;
+                border: none;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.3s, transform 0.2s;
+            }
+
+            .btn-secondary {
+                background: var(--secondary);
+                color: white;
+            }
+
+            .btn-secondary:hover {
+                background: #3dbeb6;
+                transform: translateY(-2px);
+            }
+
+            .divider {
+                text-align: center;
+                margin: 25px 0;
+                position: relative;
+            }
+
+            .divider::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: #eaeaea;
+            }
+
+            .divider span {
+                background: white;
+                padding: 0 15px;
+                color: #777;
+            }
+
+            .social-login {
+                display: flex;
+                gap: 15px;
+            }
+
+            .social-btn {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 12px;
+                border: 2px solid #eaeaea;
+                border-radius: 10px;
+                background: white;
+                cursor: pointer;
+                transition: background 0.3s, border-color 0.3s;
+                font-weight: 600;
+            }
+
+            .social-btn.facebook {
+                color: #3b5998;
+            }
+
+            .social-btn.facebook:hover {
+                background: #f0f4ff;
+                border-color: #3b5998;
+            }
+
+            .social-btn.google {
+                color: #db4437;
+            }
+
+            .social-btn.google:hover {
+                background: #fff0f0;
+                border-color: #db4437;
+            }
+
+            .auth-footer {
+                text-align: center;
+                margin-top: 25px;
+                color: #777;
+            }
+
+            .auth-footer a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .auth-footer a:hover {
+                text-decoration: underline;
+            }
+
+            .terms-agreement {
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .terms-agreement input {
+                margin-top: 5px;
+                width: 18px;
+                height: 18px;
+            }
+
+            .terms-agreement label {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            .terms-agreement a {
+                color: var(--primary);
+                text-decoration: none;
+            }
+
+            .terms-agreement a:hover {
+                text-decoration: underline;
+            }
+
+            /* Footer */
+            footer {
+                background: var(--dark);
+                color: white;
+                padding: 40px 0 20px;
+                margin-top: 50px;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            .footer-column h3 {
+                font-size: 18px;
+                margin-bottom: 20px;
+                position: relative;
+                padding-bottom: 10px;
+            }
+
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 40px;
+                height: 3px;
+                background: var(--primary);
+            }
+
+            .footer-column ul {
+                list-style: none;
+            }
+
+            .footer-column ul li {
+                margin-bottom: 10px;
+            }
+
+            .footer-column ul li a {
+                color: #bbb;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .footer-column ul li a:hover {
+                color: white;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .social-icons a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                color: white;
+                transition: background 0.3s;
+            }
+
+            .social-icons a:hover {
+                background: var(--primary);
+            }
+
+            .copyright {
+                text-align: center;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                color: #bbb;
+                font-size: 14px;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .navbar {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .auth-box {
+                    margin: 0 20px;
+                }
+
+                .social-login {
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header with Navigation -->
+        <header>
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-utensils"></i>
+                        FoodExpress
+                    </a>
+                    <div class="nav-links">
+                        <a href="index.html">Home</a>
+                        <a href="login.html">Login</a>
+                        <a href="registration.html">Restaurants</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Auth Container -->
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <h2>Join FoodExpress</h2>
+                    <p>Create your account to start ordering</p>
+                </div>
+                
+                <div class="auth-content">
+                    <form id="register-form" method="POST" >
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-user"></i> -->
+                                <input type="text" id="register-name" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-email">Email Address</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-envelope"></i> -->
+                                <input type="email" id="register-email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-phone">Phone Number</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-phone"></i> -->
+                                <input type="tel" id="register-phone" class="form-control" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-address">Address</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-phone"></i> -->
+                                <input type="tel" id="register-address" class="form-control" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-city">City</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-phone"></i> -->
+                                <input type="tel" id="register-city" class="form-control" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-lock"></i> -->
+                                <input type="password" id="register-password" class="form-control" placeholder="Create a password" required>
+                                <i class="fas fa-eye password-toggle" id="register-toggle"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-confirm">Confirm Password</label>
+                            <div class="input-with-icon">
+                                <!-- <i class="fas fa-lock"></i> -->
+                                <input type="password" id="register-confirm" class="form-control" placeholder="Confirm your password" required>
+                                <i class="fas fa-eye password-toggle" id="confirm-toggle"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="terms-agreement">
+                            <input type="checkbox" id="agree-terms" required>
+                            <label for="agree-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-secondary" id="subbtn">Create Account</button>
+    <!--                     
+                        <div class="divider">
+                            <span>Or sign up with</span>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                            </button>
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i>
+                                Google
+                            </button>
+                        </div> -->
+                        
+                        <div class="auth-footer">
+                            Already have an account? <a href="login.html">Sign in here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>FoodExpress</h3>
+                        <p>Delivering delicious meals to your doorstep with speed and care.</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Restaurants</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Food Street, City</li>
+                            <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                            <li><i class="fas fa-envelope"></i> support@foodexpress.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 FoodExpress. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        <script>
+
+            // let submitbtn = document.getElementById('subbtn');
+            let registerForm = document.getElementById('register-form');
+
+            registerForm.addEventListener("submit",async(e)=>{
+            e.preventDefault();
+            let name = document.getElementById('register-name').value;
+            let email = document.getElementById('register-email').value;
+            let phone = document.getElementById('register-phone').value;
+            let address = document.getElementById('register-address').value;
+            let city = document.getElementById('register-city').value;
+            let password = document.getElementById('register-password').value;
+            
+            let formdata = {
+                name,
+                email,
+                phone,
+                address,
+                city,
+                role: "USER",
+                password
+            }
+            let jsonData = JSON.stringify(formdata);
+
+            let resp = await fetch("http://localhost:8080/user/register",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:jsonData
+            });
+
+            if(resp.ok){
+                alert("Registration Succesfull!!");
+                let data = await resp.json();
+                localStorage.setItem("userid",data.user_id);
+                window.location.href="login.html"
+            }
+            else{
+                alert("Registration is not Succesfull");
+            }
+
+            })
+        </script>
+
+        <!-- <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Password toggle functionality
+                const passwordToggles = document.querySelectorAll('.password-toggle');
+                
+                passwordToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function() {
+                        const input = this.parentElement.querySelector('input');
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        
+                        // Toggle eye icon
+                        this.classList.toggle('fa-eye');
+                        this.classList.toggle('fa-eye-slash');
+                    });
+                });
+                
+                // Form submission handling
+                document.getElementById('register-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('register-name').value;
+                    const email = document.getElementById('register-email').value;
+                    const phone = document.getElementById('register-phone').value;
+                    const password = document.getElementById('register-password').value;
+                    const confirmPassword = document.getElementById('register-confirm').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !phone || !password || !confirmPassword) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    // Validate passwords match
+                    if (password !== confirmPassword) {
+                        alert('Passwords do not match!');
+                        return;
+                    }
+                    
+                    // Check if terms are agreed
+                    if (!document.getElementById('agree-terms').checked) {
+                        alert('Please agree to the Terms of Service and Privacy Policy');
+                        return;
+                    }
+                    
+                    // In a real application, you would send this data to your backend
+                    console.log('Registration attempt:', { name, email, phone, password });
+                    
+                    // Simulate successful registration
+                    alert('Registration successful! Please log in.');
+                    window.location.href = 'login.html';
+                });
+            });
+        </script> -->
+    </body>
+    </html>

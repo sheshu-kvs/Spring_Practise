@@ -5,34 +5,53 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
+// C:\Users\GramaVikasa\Desktop\Internship Projects\Spring_Practise\foodwebapplication\src\main\    
 
 @Entity
 
 public class restaurant {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long restaurant_id;
+    private long restaurantId;
     private String name;
     private String location;
     private float rating;
+    private String imagepath;
 
     public restaurant() {
     }
 
-    public restaurant(String location, String name, float rating, long restaurant_id) {
-        this.location = location;
+    
+
+    public restaurant(long restaurantId, String name, String location, float rating, String imagepath) {
+        this.restaurantId = restaurantId;
         this.name = name;
+        this.location = location;
         this.rating = rating;
-        this.restaurant_id = restaurant_id;
+        this.imagepath = imagepath;
+    }
+    
+
+
+
+    public String getImagepath() {
+        return imagepath;
     }
 
-    public long getRestaurant_id() {
-        return restaurant_id;
+
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
     }
 
-    public void setRestaurant_id(long restaurant_id) {
-        this.restaurant_id = restaurant_id;
+
+
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(long restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getName() {
@@ -58,6 +77,12 @@ public class restaurant {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    
+
+
+
+    
 
 
     

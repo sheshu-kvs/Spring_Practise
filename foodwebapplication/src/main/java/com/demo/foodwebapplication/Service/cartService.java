@@ -1,12 +1,17 @@
 package com.demo.foodwebapplication.Service;
 
-import com.demo.foodwebapplication.model.*;
 import java.util.List;
+
+import com.demo.foodwebapplication.model.cart;
+import com.demo.foodwebapplication.model.cart_item;
+import com.demo.foodwebapplication.model.food_item;
+import com.demo.foodwebapplication.model.user;
 
 public interface cartService {
 
     // Get a user's active cart
     cart getCartByUser(user user);
+    List<cart_item> getCartItemsByUserId(long userId);
 
     // Add a food item to user's cart
     cart addItemToCart(user user, food_item food, int quantity);

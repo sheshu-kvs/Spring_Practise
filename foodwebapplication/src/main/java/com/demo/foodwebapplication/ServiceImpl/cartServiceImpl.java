@@ -138,4 +138,10 @@ public class cartServiceImpl implements cartService {
         userCart.setTotal_price(0);
         cartRepo.save(userCart);
     }
+
+    @Override
+    public List<cart_item> getCartItemsByUserId(long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCartItemsByUserId'");
+    }
 }
