@@ -8,7 +8,4 @@ import com.demo.foodwebapplication.model.user;
 
 public interface cartRepo extends JpaRepository<cart,Long> {
        Optional<cart> findByUser(user user);
-
-
-    
 }

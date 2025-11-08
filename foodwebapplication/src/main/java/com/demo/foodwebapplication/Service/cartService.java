@@ -11,6 +11,7 @@ public interface cartService {
 
     // Get a user's active cart
     cart getCartByUser(user user);
+    
     List<cart_item> getCartItemsByUserId(long userId);
 
     // Add a food item to user's cart

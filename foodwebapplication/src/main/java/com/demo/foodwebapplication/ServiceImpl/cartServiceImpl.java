@@ -4,11 +4,13 @@ package com.demo.foodwebapplication.ServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.foodwebapplication.Repository.cartItemRepo;
 import com.demo.foodwebapplication.Repository.cartRepo;
+import com.demo.foodwebapplication.Repository.userRepo;
 import com.demo.foodwebapplication.Service.cartService;
 import com.demo.foodwebapplication.model.cart;
 import com.demo.foodwebapplication.model.cart_item;
@@ -18,6 +20,10 @@ import com.demo.foodwebapplication.model.user;
 
 @Service
 public class cartServiceImpl implements cartService {
+
+
+    @Autowired
+    private userRepo userRepo;
 
     @Autowired
     private cartRepo cartRepo;
@@ -139,9 +145,27 @@ public class cartServiceImpl implements cartService {
         cartRepo.save(userCart);
     }
 
+
     @Override
-    public List<cart_item> getCartItemsByUserId(long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCartItemsByUserId'");
-    }
+public List<cart_item> getCartItemsByUserId(long user_id) {
+
+    user u = userRepo.findById(user_id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+    cart c = cartRepo.findByUser(u)
+            .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user"));
+
+    return cartItemRepo.findByCart(c);
+}
+
+
+
+    
+
+
+
+
+
+
+
 }

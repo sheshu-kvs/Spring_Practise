@@ -73,12 +73,12 @@ public class cartController {
 
     // ✅ 3️⃣ Remove an item from a user's cart
     @DeleteMapping("/remove")
-    public ResponseEntity<?> removeItemFromCart(@RequestParam long userId,
-                                                @RequestParam long cartItemId) {
-        user u = userRepo.findById(userId)
+    public ResponseEntity<?> removeItemFromCart(@RequestParam long user_id,
+                                                @RequestParam long cart_item_id) {
+        user u = userRepo.findById(user_id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        cartService.removeItemFromCart(u, cartItemId);
+        cartService.removeItemFromCart(u, cart_item_id);
         return ResponseEntity.ok("Item removed successfully");
     }
 
@@ -94,13 +94,5 @@ public class cartController {
     }
 
 
-    // ✅ 5️⃣ Clear the user's cart (e.g., after order placement)
-    @DeleteMapping("/clear/{userId}")
-    public ResponseEntity<?> clearCart(@PathVariable long userId) {
-        user u = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        cartService.clearCart(u);
-        return ResponseEntity.ok("Cart cleared successfully");
-    }
+  
 }

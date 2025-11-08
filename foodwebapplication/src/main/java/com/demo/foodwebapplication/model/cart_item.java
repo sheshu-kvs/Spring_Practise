@@ -1,6 +1,9 @@
 package com.demo.foodwebapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,9 +19,10 @@ public class cart_item {
     
     @ManyToOne
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private cart cart; // Each item belongs to one cart
 
-     @ManyToOne
+   @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "food_id")
     private food_item food; // Each item refers to one food item
     private int quantity;
