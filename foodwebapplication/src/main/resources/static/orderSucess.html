@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 450px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h1 {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .order-info {
+            font-size: 18px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #ff3f6c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background: #e0355d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Order Placed Successfully ✅</h1>
+
+    <p>Your order has been confirmed!</p>
+
+    <div class="order-info">
+        <p><b>Order ID:</b> <span id="orderId"></span></p>
+        <p><b>Total Amount:</b> ₹<span id="totalAmount"></span></p>
+        <p><b>Delivery Address:</b></p>
+        <p id="address"></p>
+    </div>
+
+    <button class="back-btn" onclick="goHome()">Go to Home</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", loadOrder);
+
+    function loadOrder() {
+        let orderId = localStorage.getItem("latestOrderId");
+        let total = localStorage.getItem("latestOrderTotal");
+
+        let address = localStorage.getItem("userAddress");
+        let city = localStorage.getItem("userCity");
+
+        document.getElementById("orderId").innerText = orderId;
+        document.getElementById("totalAmount").innerText = total;
+        document.getElementById("address").innerText = address + ", " + city;
+    }
+
+    function goHome() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>

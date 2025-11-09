@@ -25,4 +25,5 @@ public interface cartService {
 
     // Clear all items (after order placed)
     void clearCart(user user);
+
 }

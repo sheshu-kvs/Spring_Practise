@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.foodwebapplication.Repository.cartItemRepo;
 import com.demo.foodwebapplication.Repository.food_itemRepo;
 import com.demo.foodwebapplication.Repository.userRepo;
 import com.demo.foodwebapplication.Service.cartService;
@@ -34,6 +36,10 @@ public class cartController {
 
     @Autowired
     private food_itemRepo foodRepo;
+
+    
+    @Autowired
+    private cartItemRepo cartItemRepo;
 
 
     // ✅ 1️⃣ Get all cart items by user ID
@@ -91,6 +97,25 @@ public class cartController {
 
         List<cart_item> items = cartService.getCartItems(u);
         return ResponseEntity.ok(items);
+    }
+
+
+    ///to update..
+      @PutMapping("/update/{cart_item_id}/{change}")
+    public cart_item updateQuantity(@PathVariable long cart_item_id, @PathVariable int change) {
+
+        cart_item item = cartItemRepo.findById(cart_item_id).orElse(null);
+        if(item == null) return null;
+
+        int newQty = item.getQuantity() + change;
+
+        if(newQty <= 0) {
+            cartItemRepo.delete(item);  // remove item
+            return null;
+        }
+
+        item.setQuantity(newQty);
+        return cartItemRepo.save(item);
     }
 
 

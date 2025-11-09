@@ -28,10 +28,10 @@ public class orderController{
     private userService userService; // to fetch user by id
 
       // ✅ 1️⃣ Place a new order for a user (moves all cart items into an order)
-    @PostMapping("/place/{userId}")
-    public ResponseEntity<?> placeOrder(@PathVariable long userId) {
+    @PostMapping("/place/{user_id}")
+    public ResponseEntity<?> placeOrder(@PathVariable long user_id) {
         try {
-            user userObj = userService.getUserById(userId);
+            user userObj = userService.getUserById(user_id);
             if (userObj == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
@@ -46,10 +46,10 @@ public class orderController{
     }
 
     // ✅ 2️⃣ Get all orders for a particular user
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getOrdersByUser(@PathVariable long userId) {
+    @GetMapping("/user/{user_id}")
+    public ResponseEntity<?> getOrdersByUser(@PathVariable long user_id) {
         try {
-            user userObj = userService.getUserById(userId);
+            user userObj = userService.getUserById(user_id);
             if (userObj == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
@@ -76,10 +76,10 @@ public class orderController{
     }
 
     // ✅ 4️⃣ Get a specific order by ID
-    @GetMapping("/{orderId}")
-    public ResponseEntity<?> getOrderById(@PathVariable long orderId) {
+    @GetMapping("/{order_id}")
+    public ResponseEntity<?> getOrderById(@PathVariable long order_id) {
         try {
-            orders order = orderService.getOrderById(orderId);
+            orders order = orderService.getOrderById(order_id);
             if (order == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
             }
@@ -91,10 +91,10 @@ public class orderController{
     }
 
     // ✅ 5️⃣ Cancel an order by ID
-    @DeleteMapping("/cancel/{orderId}")
-    public ResponseEntity<?> cancelOrder(@PathVariable long orderId) {
+    @DeleteMapping("/cancel/{order_id}")
+    public ResponseEntity<?> cancelOrder(@PathVariable long order_id) {
         try {
-            orderService.cancelOrder(orderId);
+            orderService.cancelOrder(order_id);
             return ResponseEntity.ok("Order cancelled successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
