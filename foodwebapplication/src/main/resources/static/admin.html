@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/admin.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #111;
+            color: white;
+            position: fixed;
+            padding-top: 30px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar a:hover {
+            background: #444;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        /* Stats boxes */
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            width: 250px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-box h3 {
+            margin: 0;
+            font-size: 22px;
+            color: #222;
+        }
+
+        .stat-box p {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="adminDashboard.html">Dashboard</a>
+        <a href="manageFood.html">Manage Food</a>
+        <a href="manageOrders.html">Manage Orders</a>
+        <a href="manageUsers.html">Manage Users</a>
+        <a href="login.html">Logout</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+        <h1>Dashboard Overview</h1>
+
+        <div class="stats-container">
+            
+            <div class="stat-box">
+                <h3>Total Users</h3>
+                <p id="totalUsers">0</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>Total Food Items</h3>
+                <p id="totalFoods">0</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>Total Orders</h3>
+                <p id="totalOrders">0</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>Total Revenue</h3>
+                <p id="totalRevenue">₹0</p>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", loadDashboard);
+
+// Load admin stats
+async function loadDashboard() {
+
+    // 🟦 Call all backend APIs
+    let userResp = await fetch("http://localhost:8080/admin/users/count");
+    let foodResp = await fetch("http://localhost:8080/admin/food/count");
+    let orderResp = await fetch("http://localhost:8080/admin/orders/count");
+    let revenueResp = await fetch("http://localhost:8080/admin/orders/revenue");
+
+    let users = await userResp.json();
+    let foods = await foodResp.json();
+    let orders = await orderResp.json();
+    let revenue = await revenueResp.json();
+
+    // 🟦 Set values in UI
+    document.getElementById("totalUsers").innerText = users;
+    document.getElementById("totalFoods").innerText = foods;
+    document.getElementById("totalOrders").innerText = orders;
+    document.getElementById("totalRevenue").innerText = "₹" + revenue;
+}
+
+</script>
+
+</body>
+</html>
