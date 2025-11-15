@@ -202,12 +202,13 @@ document.getElementById("place-order-btn").addEventListener("click", async () =>
     });
 
     if(resp.ok){
+        let data = await resp.json();
         alert("Order Placed Successfully!");
         window.location.href = "orderSucess.html";
-        localStorage.setItem("latestOrderId", resp.order_id);
-       localStorage.setItem("latestOrderTotal", resp.total_price);
-       localStorage.setItem("userAddress", resp.address);
-       localStorage.setItem("userCity", resp.city);
+        localStorage.setItem("latestOrderId", data.order_id);
+        localStorage.setItem("latestOrderTotal", data.total_price);
+        localStorage.setItem("userAddress", data.address);
+        localStorage.setItem("userCity", data.city);
     } else {
         let data = await resp.text();
         alert("Error placing order: " + data);

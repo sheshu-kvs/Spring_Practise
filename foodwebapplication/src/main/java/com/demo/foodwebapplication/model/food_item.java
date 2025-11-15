@@ -4,8 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "food_item", // You might already have a name, if not, add it
+       indexes = {
+           @Index(name = "idx_restaurant_id", columnList = "restaurantId") // 👈 THIS IS THE CHANGE
+       })
+       //before 834.08 ms to load the data in the each restaurant with the food_item.. now it is taking 781.35 ms
+       //before cacheable it wolud taking the 781.35ms 
 public class food_item {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

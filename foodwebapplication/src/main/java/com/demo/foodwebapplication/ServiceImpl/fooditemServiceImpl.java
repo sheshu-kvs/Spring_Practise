@@ -10,8 +10,9 @@ import java.util.Optional;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartFile; // 👈 Import this
 
 import com.demo.foodwebapplication.Repository.food_itemRepo;
 import com.demo.foodwebapplication.Service.fooditemService;
@@ -64,6 +65,7 @@ public class fooditemServiceImpl implements fooditemService{
     }
 
     @Override
+    @Cacheable("restaurantMenus")
     public List<food_item> getFoodsByRestaurantId(long restaurantId) {
         return foodItemRepo.findByRestaurantId(restaurantId);
     }
