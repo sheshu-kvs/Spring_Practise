@@ -28,7 +28,7 @@ public class FormController {
                       "Message: " + data.getMessage();
 
         // this recepient we need to mention the email here(sending address)
-        String recipient = "venkatsheshayyakadvakal@gmail.com"; 
+        String recipient = "info@terrawebs.com"; 
         emailService.SendEmail(recipient, "New Form Submission", body);
 
         // it will go the success.html
