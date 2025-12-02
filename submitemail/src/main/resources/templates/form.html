@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            
+        }
+        table{
+          
+            font-family: cursive;
+            background-color: rgb(183, 203, 220);
+            padding: 20px;
+            border-radius:5px ;
+        }
+        td[colspan="2"]{
+            font-family: cursive;
+             text-align: center;      /* Centers the button horizontally within the cell */
+          
+        
+
+        }
+         td[colspan="2"] button{
+          padding: 2px 7px;
+          active: scale 95px;
+             border-radius: 5px;
+             border: 2px solid black;
+         }
+
+       
+    </style>
+</head>
+<body>
+    
+    <div class="main">
+     
+    <form action="/submit" method="post">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" placeholder="Enter The Name" required></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="address" placeholder="Enter The Name" required></td>
+
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td><textarea name="message" placeholder="Enter the Message"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button  type="submit">Submit</button></td>
+            </tr>
+        </table>
+        
+    </form>
+    </div>
+    
+</body>
+</html>
